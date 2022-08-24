@@ -33,24 +33,8 @@ class Javbus(Parser):
     def search(self, number):
         self.number = number
         try:
-            if self.specifiedUrl:
-                self.detailurl = self.specifiedUrl
-                htmltree = self.getHtmlTree(self.detailurl)
-                result = self.dictformat(htmltree)
-                return result
-            url = "https://www." + secrets.choice([
-                'buscdn.fun', 'busdmm.fun', 'busfan.fun', 'busjav.fun',
-                'cdnbus.fun',
-                'dmmbus.fun', 'dmmsee.fun',
-                'fanbus.us',
-                'seedmm.fun',
-                ]) + "/"
-            try:
-                self.detailurl = url + number
-                self.htmlcode = self.getHtml(self.detailurl)
-            except:
-                self.detailurl = 'https://www.javbus.com/' + number
-                self.htmlcode = self.getHtml(self.detailurl)
+            self.detailurl = 'https://www.javbus.com/' + number
+            self.htmlcode = self.getHtml(self.detailurl)
             if self.htmlcode == 404:
                 return 404
             htmltree = etree.fromstring(self.htmlcode,etree.HTMLParser())
